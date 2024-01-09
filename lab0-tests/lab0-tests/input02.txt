@@ -1,0 +1,15 @@
+
+
+title: Alcatraz and the Evil Librarians
+author: Brandon Sanderson
+genre: fantasy
+pages: 320
+hours: 1.6
+
+title: The False Prince
+author: Jennifer A. Nielsen
+genre: fantasy
+pages: 352
+genre: fiction
+
+
