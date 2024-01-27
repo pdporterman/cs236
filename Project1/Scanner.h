@@ -24,7 +24,7 @@ class Scanner {
 
 
         vector<Token> scanTokens() {
-            for (int i = 0; i < input.length(); i++) {
+            for (size_t i = 0; i < input.length(); i++) {
                 auto c = input[i];
                 switch (c) {
                     case '\t':
@@ -75,15 +75,9 @@ class Scanner {
                             while(i < input.length() && input[i] != '#') {
                                 if (input[i] == '\n') {
                                     j++;
-                                    i++;
                                 }
-                                else if (input[i] == '\r') {
-                                    i++;
-                                }
-                                else{
-                                    value += input[i];
-                                    i++;
-                                }
+                                value += input[i];
+                                i++;
                             }
                             if (i < input.length() && input[i] == '#') {
                                 value += input[i];
@@ -103,7 +97,7 @@ class Scanner {
                                 value += input[i];
                                 i++;
                             }
-                            value.erase(value.length()-1);
+                            //value.erase(value.length()-1);
                             Tokens.emplace_back(COMMENT, value, line);
                             line++;
                         }
@@ -111,7 +105,11 @@ class Scanner {
                     case '\'':
                         value = input[i];
                         i++;
+                        j = 0;
                         while(i < input.length() && input[i] != '\''){
+                            if (input[i] == '\n') {
+                                j++;
+                            }
                             value += input[i];
                             i++;
                         }
@@ -123,6 +121,7 @@ class Scanner {
                         else{
                             Tokens.emplace_back(UNDEFINED, value, line);
                         }
+                        line += j;
                         i--;
                         break;
                     default:

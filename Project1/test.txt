@@ -1,23 +1,18 @@
 
-# lots of line comments
 
-###########################
-#Schemes:
-	#student(Name, ID, Address, Major)
-###########################
+# unterminated string
 
-###########################
-#Facts:
-	#student('North', '51', '10 Main', 'CS').
-###########################
+Schemes:
+student(Name, ID, Address, Major)
 
-###########################
-#Rules:
-	#major(Name,Major):-student(Name,ID,Address,Major).
-###########################
+Facts:
+student(North, '51, Main, CS).
 
-###########################
-#Queries:
-	#major('North',Major)?
-###########################
+Rules:
+major(Name,Major):-student(Name,ID,Address,Major).
+
+Queries:
+major(North,Major)?
+major(Name,MATH)?
+
 
