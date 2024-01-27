@@ -1,0 +1,33 @@
+
+
+# valid identifiers
+
+ThisIsAnID
+
+These
+Are
+IDs
+
+Line42
+
+Row4Col8
+
+
+# identifiers and punctuation
+
+Hello,World
+
+(Hello World)
+
+Hello:  World?
+
+Hello:-World
+
+
+# invalid identifiers
+
+42Line
+
+8Col4Row
+
+

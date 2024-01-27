@@ -1,0 +1,32 @@
+(COMMENT,"# unterminated string",3)
+(SCHEMES,"Schemes",5)
+(COLON,":",5)
+(ID,"student",6)
+(LEFT_PAREN,"(",6)
+(ID,"Name",6)
+(COMMA,",",6)
+(ID,"ID",6)
+(COMMA,",",6)
+(ID,"Address",6)
+(COMMA,",",6)
+(ID,"Major",6)
+(RIGHT_PAREN,")",6)
+(FACTS,"Facts",8)
+(COLON,":",8)
+(ID,"student",9)
+(LEFT_PAREN,"(",9)
+(ID,"North",9)
+(COMMA,",",9)
+(UNDEFINED,"'51, Main, CS).
+
+Rules:
+major(Name,Major):-student(Name,ID,Address,Major).
+
+Queries:
+major(North,Major)?
+major(Name,MATH)?
+
+
+",9)
+(EOF,"",19)
+Total Tokens = 21

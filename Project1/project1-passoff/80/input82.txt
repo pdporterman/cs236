@@ -1,0 +1,18 @@
+
+
+# unterminated string
+
+Schemes:
+student(Name, ID, Address, Major)
+
+Facts:
+student(North, '51, Main, CS).
+
+Rules:
+major(Name,Major):-student(Name,ID,Address,Major).
+
+Queries:
+major(North,Major)?
+major(Name,MATH)?
+
+

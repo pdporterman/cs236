@@ -1,0 +1,9 @@
+(COMMENT,"# valid strings",3)
+(STRING,"'This is a string'",5)
+(STRING,"''",7)
+(STRING,"''",9)
+(STRING,"'bob'",9)
+(STRING,"'frank'",11)
+(STRING,"'{}[]()!@#$%^&*'",13)
+(EOF,"",16)
+Total Tokens = 8

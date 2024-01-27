@@ -1,0 +1,8 @@
+(COMMENT,"# unterminated string",3)
+(STRING,"'good string'",5)
+(UNDEFINED,"'bad string
+
+
+",7)
+(EOF,"",10)
+Total Tokens = 4

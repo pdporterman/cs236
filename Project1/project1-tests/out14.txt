@@ -1,0 +1,5 @@
+(COMMENT,"# identifiers that contain numbers",3)
+(ID,"bob",5)
+(ID,"joe42",7)
+(EOF,"",10)
+Total Tokens = 4

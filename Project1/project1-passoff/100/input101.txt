@@ -1,0 +1,14 @@
+
+# complete program with all token types
+
+Schemes:student(Name, ID, Address, Major)
+Facts:student('North', '51', '10 Main', 'CS').
+student('Reagan','52', '11 Maple', 'CS').student('Reagan','52', '11 Maple', 'CS').
+student('Clinton','53','12 Ashton', 'MATH').
+
+Rules:major(Name,Major):-student(Name,ID,Address,Major).
+
+Queries:major('North',Major)?
+major(Name,'MATH')?major(Name,'MATH')?
+major(Name,'MATH')?major(Name,'MATH')?
+

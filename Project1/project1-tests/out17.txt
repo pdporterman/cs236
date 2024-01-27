@@ -1,0 +1,7 @@
+(FACTS,"Facts",1)
+(COLON,":",1)
+(UNDEFINED,"$",2)
+(RULES,"Rules",3)
+(COLON,":",3)
+(EOF,"",4)
+Total Tokens = 6

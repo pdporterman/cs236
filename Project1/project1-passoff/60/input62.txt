@@ -1,0 +1,34 @@
+
+
+# keywords and identifiers
+
+Schemes
+Facts
+Rules
+Queries
+
+schemes facts rules queries
+
+SchemesFactsRulesQueries
+
+Scheme
+Schemes
+Schemess
+SCHEMES
+
+Fact
+Facts
+Factss
+FACTS
+
+Rule
+Rules
+Ruless
+RULES
+
+Querie
+Queries
+Queriess
+QUERIES
+
+
