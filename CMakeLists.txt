@@ -8,4 +8,9 @@ include_directories(Project1)
 add_executable(cs236
         Project1/main.cpp
         Project1/Scanner.h
-        Project1/Token.h)
+        Project1/Token.h
+        lab2/main.cpp
+        lab2/Scanner.h
+        lab2/Parser.h
+        Project2/Token.h
+        Project2/main.cpp)
