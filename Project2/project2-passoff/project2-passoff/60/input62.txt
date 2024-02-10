@@ -1,0 +1,38 @@
+
+
+# test with no errors, larger sizes of lists
+
+
+Schemes:
+
+  a(x)
+  b(x,y)
+  c(x,y,z)
+  d(x,y,z,w)
+  e(x,y,z,w,v)
+
+Facts:
+
+  a('A').
+  b('A','B').
+  c('A','B','C').
+  d('A','B','C','D').
+  e('A','B','C','D','E').
+
+Rules:
+
+  a(x) :- b(x).
+  b(x,y) :- c(x,'y'),d(x,'y').
+  c(x,y,z) :- d(x,'y',z),e(x,'y',z),f(x,'y',z).
+  d(x,y,z,w) :- e(x,'y',z,'w'),f(x,'y',z,'w'),g(x,'y',z,'w'),h(x,'y',z,'w').
+  e(x,y,z,w,v) :- f(x,y,z,w,v),g(x,y,z,w,v),h(x,y,z,w,v),i(x,y,z,w,v),j(x,y,z,w,v).
+
+Queries:
+
+  a('A')?
+  b('A',B)?
+  c('A',B,'C')?
+  d('A',B,'C',D)?
+  e('A',B,'C',D,'E')?
+
+

@@ -13,4 +13,8 @@ add_executable(cs236
         lab2/Scanner.h
         lab2/Parser.h
         Project2/Token.h
-        Project2/main.cpp)
+        Project2/main.cpp
+        Project2/Parameter.h
+        Project2/Predicate.h
+        Project2/Rule.h
+        Project2/DatalogProgram.h)

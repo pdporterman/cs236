@@ -1,0 +1,16 @@
+
+
+# error, must be at least one scheme
+
+
+Schemes:
+
+Facts:
+
+Rules:
+
+Queries:
+
+  a('A')?
+
+

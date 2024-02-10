@@ -1,0 +1,16 @@
+
+
+# error, must be at least one query
+
+
+Schemes:
+
+  a(x)
+
+Facts:
+
+Rules:
+
+Queries:
+
+

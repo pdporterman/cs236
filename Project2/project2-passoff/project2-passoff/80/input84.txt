@@ -1,0 +1,22 @@
+
+
+# error, can't have rules before facts
+
+
+Schemes:
+
+  a(x)
+
+Rules:
+
+  a(x) :- b(x).
+
+Facts:
+
+  a('A').
+
+Queries:
+
+  a('A')?
+
+

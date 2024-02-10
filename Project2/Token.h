@@ -90,6 +90,10 @@ class Token{
             return out.str();
         }
 
+        string getValue() const {
+            return value;
+        }
+
         TokenType getType() const {
             return type;
         }

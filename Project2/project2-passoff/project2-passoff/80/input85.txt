@@ -1,0 +1,22 @@
+
+
+# error, schemes can't contain strings
+
+
+Schemes:
+
+  a(x, 'Bob')
+
+Facts:
+
+  a('A').
+
+Rules:
+
+  a(x) :- b(x).
+
+Queries:
+
+  a('A')?
+
+

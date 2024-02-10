@@ -1,0 +1,26 @@
+
+
+# error, can't have two queries sections
+
+
+Schemes:
+
+  a(x)
+
+Facts:
+
+  a('A').
+
+Rules:
+
+  a(x) :- b(x).
+
+Queries:
+
+  a('A')?
+
+Queries:
+
+  a('A')?
+
+

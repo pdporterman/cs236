@@ -1,0 +1,25 @@
+
+
+# small test with no syntax errors
+
+
+Schemes:
+
+  married(x,y)
+  child(x,y)
+
+Facts:
+
+  married('Jim', 'Bea').
+  child('Ned', 'Bea').
+
+Rules:
+
+  married(y,x) :- married(x,y).
+  child(x,z) :- child(x,y), married(y,z).
+
+Queries:
+
+  child('Ned', 'Jim')?
+
+

@@ -1,0 +1,16 @@
+Success!
+Schemes(3):
+  sister(x,y)
+  parent(x,y)
+  aunt(x,y)
+Facts(2):
+  sister('Ann','Bob').
+  parent('Bob','Jay').
+Rules(1):
+  aunt(x,z) :- sister(x,y),parent(y,z).
+Queries(1):
+  aunt('Ann','Jay')?
+Domain(3):
+  'Ann'
+  'Bob'
+  'Jay'

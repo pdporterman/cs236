@@ -1,0 +1,18 @@
+
+
+# test with no errors, smallest valid sizes of lists
+
+
+Schemes:
+
+  a(x)
+
+Facts:
+
+Rules:
+
+Queries:
+
+  a('A')?
+
+

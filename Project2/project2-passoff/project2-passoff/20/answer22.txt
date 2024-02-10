@@ -1,0 +1,16 @@
+Success!
+Schemes(2):
+  married(x,y)
+  child(x,y)
+Facts(2):
+  married('Jim','Bea').
+  child('Ned','Bea').
+Rules(2):
+  married(y,x) :- married(x,y).
+  child(x,z) :- child(x,y),married(y,z).
+Queries(1):
+  child('Ned','Jim')?
+Domain(3):
+  'Bea'
+  'Jim'
+  'Ned'

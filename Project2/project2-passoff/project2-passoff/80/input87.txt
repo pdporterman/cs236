@@ -1,0 +1,22 @@
+
+
+# error, param lists can't be empty
+
+
+Schemes:
+
+  a(x)
+
+Facts:
+
+  a().
+
+Rules:
+
+  a() :- b().
+
+Queries:
+
+  a('A')?
+
+

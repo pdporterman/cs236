@@ -1,0 +1,22 @@
+
+
+# error, facts can't contain names
+
+
+Schemes:
+
+  a(x)
+
+Facts:
+
+  a('A', x).
+
+Rules:
+
+  a(x) :- b(x).
+
+Queries:
+
+  a('A')?
+
+
