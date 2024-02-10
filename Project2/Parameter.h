@@ -25,12 +25,7 @@ public:
 
     string toString(){
         ostringstream str;
-        if (ID){
-            str << item;
-        }
-        else{
-            str << "\'" << item << "\'";
-        }
+        str << item;
         return str.str();
     }
 };

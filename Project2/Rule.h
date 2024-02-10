@@ -10,7 +10,7 @@ using namespace std;
 class Rule{
 private:
 
-    vector<Predicate> rule;
+    vector<Predicate> rule{};
 
 public:
 
@@ -22,16 +22,19 @@ public:
         rule.push_back(pred);
     }
 
+    vector<Predicate> getVec(){
+        return rule;
+    }
+
     string toString(){
         ostringstream str;
-        auto start = rule[0];
-        str << start.rulesToString() << " :- ";
+        str << rule.begin()->rulesToString() << " :- ";
         rule.erase(rule.begin());
         while (!rule.empty()){
-            str << rule[0].rulesToString();
+            str << rule.begin()->rulesToString(); // this is the problem
             rule.erase(rule.begin());
             if (rule.empty()){
-                str << " ." << endl;
+                str << " .";
             } else{
                 str <<" ,";
             }

@@ -37,8 +37,8 @@ public:
     }
 
 
-    void addQuery(const Predicate& rule){
-        Queries.push_back(rule);
+    void addQuery(const Predicate& query){
+        Queries.push_back(query);
     }
 
 
@@ -48,6 +48,7 @@ public:
 
 
     string ToString(){
+        cout << "Success!" << endl;
         ostringstream str;
         str << "Schemes(" << Schemes.size() << "):" << endl;
         for (auto p : Schemes){
@@ -64,6 +65,10 @@ public:
         str << "Queries(" << Queries.size() << "):" << endl;
         for (auto p : Queries){
             str << "  " << p.queriesToString() << endl;
+        }
+        str << "Domains(" << domains.size() << "):" << endl;
+        for (const auto& p : domains){
+            str << "  " << p << endl;
         }
         return str.str();
     }

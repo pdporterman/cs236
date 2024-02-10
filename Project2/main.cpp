@@ -18,6 +18,5 @@ int main(int argc, char* argv[]) {
     Scanner s = Scanner(input);
     vector<Token> Tokens = s.scanTokens();
     Parser p = Parser(Tokens);
-    DataLog dl = p.startparse();
-    cout << dl.ToString() << endl;
+    p.startParse();
 }

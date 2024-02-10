@@ -15,28 +15,30 @@ using namespace std;
 class Parser {
 private:
     vector<Token> tokens;
+    Parameter para = Parameter("temp", true);
 public:
     explicit Parser(const vector<Token>& tokens) : tokens(tokens) {}
 
 
     Predicate pred;
     Rule newRule;
-    DataLog dl = DataLog();
+    DataLog dl = * new DataLog();
 
-    DataLog startparse() {
+    void startParse() {
         try{
+            cout << "start ";
             parse();
-            return dl;
+            cout << "finish" << endl;
+            cout << dl.ToString() << endl;
         } catch (const std::exception& e) {
             cout << "Failure!\n  " << tokens[0].toString() << endl;
         }
     }
 
 
-    TokenType nextToken(){
-        return tokens[1].getType();
+    DataLog getDL() const{
+        return dl;
     }
-
 
 
     TokenType tokenType() const {
@@ -53,11 +55,12 @@ public:
         throw std::runtime_error("aaaaaaaaaaahhhhhhhhhh");
     }
 
+
     void parse() {
         match(TokenType::SCHEMES);
         match(TokenType::COLON);
 
-        if (nextToken() != TokenType::ID){
+        if (tokenType() != TokenType::ID){
             throwError();
         }
 
@@ -69,7 +72,7 @@ public:
         match(TokenType::FACTS);
         match(TokenType::COLON);
 
-        if (nextToken() != TokenType::ID){
+        if (tokenType() != TokenType::ID && tokenType() != TokenType::RULES){
             throwError();
         }
 
@@ -81,7 +84,7 @@ public:
         match(TokenType::RULES);
         match(TokenType::COLON);
 
-        if (nextToken() != TokenType::ID){
+        if (tokenType() != TokenType::ID && tokenType() != TokenType::QUERIES){
             throwError();
         }
 
@@ -94,7 +97,7 @@ public:
         match(TokenType::QUERIES);
         match(TokenType::COLON);
 
-        if (nextToken() != TokenType::ID){
+        if (tokenType() != TokenType::ID){
             throwError();
         }
 
@@ -107,13 +110,12 @@ public:
 
 
     void match(TokenType t) {
-        //std::cout << "match: " << t << std::endl;
         while (tokenType() == COMMENT){
             advanceToken();
         }
         if (tokenType() == t) {
             if (t == TokenType::ID || t == TokenType::STRING){
-                Parameter para = *new Parameter(tokens[0].getValue(), t == TokenType::ID);
+                para = Parameter(tokens[0].getValue(), t == TokenType::ID);
                 pred.addPredicate(para);
             }
             advanceToken(); // Advance to the next token
@@ -123,10 +125,24 @@ public:
     }
 
 
+    void factIdList() {
+        if (tokenType() == COMMA) {
+            match(COMMA);
+            match(STRING);
+            dl.addDomain(para.toString());
+            factIdList();
+        } else {
+            // lambda do nothing
+        }
+    }
+
+
     void idList() {
         if (tokenType() == COMMA) {
             match(COMMA);
-            match(ID);
+            if (tokenType() == ID || tokenType() == STRING){
+                match(tokenType());
+            }
             idList();
         } else {
             // lambda do nothing
@@ -146,8 +162,8 @@ public:
     void fact() {
         match(TokenType::ID);         // fact -> ID
         match(TokenType::LEFT_PAREN); // fact -> ID LEFT_PAREN
-        match(TokenType::ID);         // fact -> ID LEFT_PAREN ID
-        idList();                 // fact -> ID LEFT_PAREN ID idList
+        match(TokenType::STRING);
+        factIdList();                 // fact -> ID LEFT_PAREN ID idList
         match(TokenType::RIGHT_PAREN);
         match(TokenType::PERIOD);
         dl.addFact(pred);
@@ -155,15 +171,14 @@ public:
 
 
     void rule() {
-        match(TokenType::ID);         // fact -> ID
-        match(TokenType::LEFT_PAREN); // fact -> ID LEFT_PAREN
-        match(TokenType::ID);         // fact -> ID LEFT_PAREN ID
-        idList();                 // fact -> ID LEFT_PAREN ID idList
+        match(TokenType::ID);
+        match(TokenType::LEFT_PAREN);
+        match(TokenType::ID);
+        idList();
         match(TokenType::RIGHT_PAREN);
         newRule.addPred(pred);
         pred = Predicate();
         match(TokenType::COLON_DASH);
-        match(TokenType::PERIOD);
         match(TokenType::ID);
         match(TokenType::LEFT_PAREN);
         match(TokenType::ID);
@@ -189,7 +204,7 @@ public:
     void queries() {
         match(TokenType::ID);
         match(TokenType::LEFT_PAREN);
-        match(TokenType::ID);
+        match(TokenType::STRING);
         idList();
         match(TokenType::RIGHT_PAREN);
         match(TokenType::Q_MARK);

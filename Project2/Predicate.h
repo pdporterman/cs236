@@ -35,7 +35,7 @@ public:
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ")" << endl;
+                str << ")";
             } else{
                 str <<",";
             }
@@ -51,7 +51,7 @@ public:
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ")." << endl;
+                str << ") .";
             } else{
                 str <<",";
             }
@@ -67,7 +67,7 @@ public:
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ")" << endl;
+                str << ")";
             } else{
                 str <<",";
             }
@@ -83,7 +83,7 @@ public:
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ")?" << endl;
+                str << ") ?";
             } else{
                 str <<",";
             }
