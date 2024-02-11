@@ -32,7 +32,7 @@ public:
     }
 
 
-    void addRule(const Rule& rule){
+    void addRule(Rule rule){
         Rules.push_back(rule);
     }
 
@@ -48,8 +48,8 @@ public:
 
 
     string ToString(){
-        cout << "Success!" << endl;
         ostringstream str;
+        str << "Success!" << endl;
         str << "Schemes(" << Schemes.size() << "):" << endl;
         for (auto p : Schemes){
             str << "  " << p.schemesToString() << endl;
@@ -66,7 +66,7 @@ public:
         for (auto p : Queries){
             str << "  " << p.queriesToString() << endl;
         }
-        str << "Domains(" << domains.size() << "):" << endl;
+        str << "Domain(" << domains.size() << "):" << endl;
         for (const auto& p : domains){
             str << "  " << p << endl;
         }

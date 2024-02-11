@@ -26,9 +26,7 @@ public:
 
     void startParse() {
         try{
-            cout << "start ";
             parse();
-            cout << "finish" << endl;
             cout << dl.ToString() << endl;
         } catch (const std::exception& e) {
             cout << "Failure!\n  " << tokens[0].toString() << endl;
@@ -137,6 +135,16 @@ public:
     }
 
 
+    void schemeIdList() {
+        if (tokenType() == COMMA) {
+            match(COMMA);
+            match(ID);
+            idList();
+        } else {
+            // lambda do nothing
+        }
+    }
+
     void idList() {
         if (tokenType() == COMMA) {
             match(COMMA);
@@ -153,7 +161,7 @@ public:
         match(TokenType::ID);         // scheme -> ID
         match(TokenType::LEFT_PAREN); // scheme -> ID LEFT_PAREN
         match(TokenType::ID);         // scheme -> ID LEFT_PAREN ID
-        idList();                 // scheme -> ID LEFT_PAREN ID idList
+        schemeIdList();                 // scheme -> ID LEFT_PAREN ID idList
         match(TokenType::RIGHT_PAREN);
         dl.addScheme(pred);
     }
@@ -163,6 +171,7 @@ public:
         match(TokenType::ID);         // fact -> ID
         match(TokenType::LEFT_PAREN); // fact -> ID LEFT_PAREN
         match(TokenType::STRING);
+        dl.addDomain(para.toString());
         factIdList();                 // fact -> ID LEFT_PAREN ID idList
         match(TokenType::RIGHT_PAREN);
         match(TokenType::PERIOD);
@@ -173,7 +182,7 @@ public:
     void rule() {
         match(TokenType::ID);
         match(TokenType::LEFT_PAREN);
-        match(TokenType::ID);
+        Helper();
         idList();
         match(TokenType::RIGHT_PAREN);
         newRule.addPred(pred);
@@ -181,7 +190,7 @@ public:
         match(TokenType::COLON_DASH);
         match(TokenType::ID);
         match(TokenType::LEFT_PAREN);
-        match(TokenType::ID);
+        Helper();
         idList();
         match(TokenType::RIGHT_PAREN);
         newRule.addPred(pred);
@@ -190,7 +199,7 @@ public:
             match(TokenType::COMMA);
             match(TokenType::ID);
             match(TokenType::LEFT_PAREN);
-            match(TokenType::ID);
+            Helper();
             idList();
             match(TokenType::RIGHT_PAREN);
             newRule.addPred(pred);
@@ -201,10 +210,19 @@ public:
         dl.addRule(newRule);
     }
 
+    void Helper(){
+        if(tokenType() == TokenType::STRING){
+            match(TokenType::STRING);
+        } else{
+            match(TokenType::ID);
+        }
+    }
+
+
     void queries() {
         match(TokenType::ID);
         match(TokenType::LEFT_PAREN);
-        match(TokenType::STRING);
+        Helper();
         idList();
         match(TokenType::RIGHT_PAREN);
         match(TokenType::Q_MARK);

@@ -29,7 +29,7 @@ public:
 
     string schemesToString(){
         ostringstream str;
-        str << predicate.begin()->toString() << " (";
+        str << predicate.begin()->toString() << "(";
         predicate.erase(predicate.begin());
         while (!predicate.empty()){
             str << predicate.begin()->toString();
@@ -45,13 +45,13 @@ public:
 
     string factsToString(){
         ostringstream str;
-        str << predicate.begin()->toString() << " (";
+        str << predicate.begin()->toString() << "(";
         predicate.erase(predicate.begin());
         while (!predicate.empty()){
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ") .";
+                str << ").";
             } else{
                 str <<",";
             }
@@ -61,7 +61,7 @@ public:
 
     string rulesToString(){
         ostringstream str;
-        str << predicate.begin()->toString() << " (";
+        str << predicate.begin()->toString() << "(";
         predicate.erase(predicate.begin());
         while (!predicate.empty()){
             str << predicate.begin()->toString();
@@ -77,13 +77,13 @@ public:
 
     string queriesToString(){
         ostringstream str;
-        str << predicate.begin()->toString() << " (";
+        str << predicate.begin()->toString() << "(";
         predicate.erase(predicate.begin());
         while (!predicate.empty()){
             str << predicate.begin()->toString();
             predicate.erase(predicate.begin());
             if (predicate.empty()){
-                str << ") ?";
+                str << ")?";
             } else{
                 str <<",";
             }
