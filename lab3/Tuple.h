@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <utility>
 #include <vector>
 #include "Scheme.h"
 
@@ -10,19 +11,17 @@ class Tuple : public vector<string> {
 
 public:
 
-    explicit Tuple(vector<string> values) : vector<string>(values) { }
+    explicit Tuple(vector<string> values) : vector<string>(std::move(values)) { }
 
 
     string toString(const Scheme& scheme) const {
         const Tuple& tuple = *this;
         stringstream out;
         // fix the code to print "name=value" pairs
-        out << scheme.at(0) << "=";
-        out << tuple.at(0) << ", ";
-        out << scheme.at(1) << "=";;
-        out << tuple.at(1) << ", ";
-        out << scheme.at(2) << "=";;
-        out << tuple.at(2) << ", ";
+        for (int i = 0; i < tuple.size(); i++) {
+            out << scheme.at(i) << "=";
+            out << tuple.at(i) << ", ";
+        }
         return out.str();
     }
 
