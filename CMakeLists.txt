@@ -17,4 +17,8 @@ add_executable(cs236
         Project2/Parameter.h
         Project2/Predicate.h
         Project2/Rule.h
-        Project2/DatalogProgram.h)
+        Project2/DatalogProgram.h
+        lab3/main.cpp
+        lab3/Scheme.h
+        lab3/Tuple.h
+        lab3/Relation.h)
