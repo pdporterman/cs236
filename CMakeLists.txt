@@ -21,4 +21,6 @@ add_executable(cs236
         lab3/main.cpp
         lab3/Scheme.h
         lab3/Tuple.h
-        lab3/Relation.h)
+        lab3/Relation.h
+        Project3/Database.h
+        Project3/Tuple.h)

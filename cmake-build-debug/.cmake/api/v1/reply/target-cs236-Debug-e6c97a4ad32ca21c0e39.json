@@ -127,7 +127,9 @@
 				11,
 				13,
 				14,
-				15
+				15,
+				16,
+				17
 			]
 		}
 	],
@@ -215,6 +217,16 @@
 		{
 			"backtrace" : 1,
 			"path" : "lab3/Relation.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Project3/Database.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Project3/Tuple.h",
 			"sourceGroupIndex" : 1
 		}
 	],
