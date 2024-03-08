@@ -27,7 +27,7 @@ public:
     void startParse() {
         try{
             parse();
-            cout << dl.ToString() << endl;
+            //cout << dl.ToString() << endl;
         } catch (const std::exception& e) {
             cout << "Failure!\n  " << tokens[0].toString() << endl;
         }

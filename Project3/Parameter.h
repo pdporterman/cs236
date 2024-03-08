@@ -1,7 +1,11 @@
+#pragma once
+
 #include <utility>
 #include <ostream>
+#include <string>
+#include <sstream>
 
-
+using namespace std;
 
 
 class Parameter {
@@ -24,8 +28,8 @@ public:
     }
 
     string toString(){
-        ostringstream str;
-        str << item;
-        return str.str();
+        ostringstream s;
+        s << item;
+        return s.str();
     }
 };

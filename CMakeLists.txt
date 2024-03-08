@@ -23,4 +23,9 @@ add_executable(cs236
         lab3/Tuple.h
         lab3/Relation.h
         Project3/Database.h
-        Project3/Tuple.h)
+        Project3/Tuple.h
+        Project3/Interpreter.h
+        Project3/Parameter.h
+        Project3/Predicate.h
+        Project3/Relation.h
+        Project3/Scheme.h)

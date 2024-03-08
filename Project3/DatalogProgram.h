@@ -47,6 +47,19 @@ public:
     }
 
 
+    vector<Predicate> getScheme(){
+        return Schemes;
+    }
+
+    vector<Predicate> getFacts(){
+        return Facts;
+    }
+
+    vector<Predicate> getQueries(){
+        return Queries;
+    }
+
+
     string ToString(){
         ostringstream str;
         str << "Success!" << endl;
