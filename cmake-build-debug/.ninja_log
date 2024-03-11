@@ -1,0 +1,10 @@
+# ninja log v5
+14	1685	7316588202857812	CMakeFiles/cs236.dir/lab2/main.cpp.obj	bf8ce2cdec905e97
+28	2353	7316588209536286	CMakeFiles/cs236.dir/lab3/main.cpp.obj	da0c907e48a84e3d
+6	1817	7316588204171683	CMakeFiles/cs236.dir/Project1/main.cpp.obj	272af2ffbe704ae
+30	2890	7316587640329063	CMakeFiles/cs236.dir/Project3/main.cpp.obj	9ef1a7ca94d6e2f6
+22	2982	7316588215797800	CMakeFiles/cs236.dir/Project2/main.cpp.obj	2eca90a6f06b685d
+1	281	7316593035386243	build.ninja	f6ea84c15e3894ae
+7	677	7316593042717325	cs236.exe	3a66eccff90efa8c
+6	2859	7316594348967533	CMakeFiles/cs236.dir/Project3/main.cpp.obj	9ef1a7ca94d6e2f6
+2860	3482	7316594355227539	cs236.exe	3a66eccff90efa8c

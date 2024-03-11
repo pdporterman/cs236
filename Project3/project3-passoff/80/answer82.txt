@@ -1,0 +1,30 @@
+a(x,x,x,x)? Yes(2)
+  x='2'
+  x='4'
+a(x,x,y,y)? Yes(4)
+  x='2', y='2'
+  x='2', y='4'
+  x='4', y='2'
+  x='4', y='4'
+a(x,y,x,y)? Yes(2)
+  x='2', y='2'
+  x='4', y='4'
+a(A,B,B,A)? Yes(2)
+  A='2', B='2'
+  A='4', B='4'
+a(x,x,'1',x)? No
+a(x,'2',x,x)? Yes(1)
+  x='2'
+b(x,x,x,x,x)? No
+b(x,y,x,y,x)? Yes(2)
+  x='2', y='1'
+  x='3', y='4'
+b(x,x,x,z,z)? No
+b(z,z,x,z,z)? Yes(1)
+  z='2', x='4'
+b(x,x,z,z,z)? Yes(1)
+  x='2', z='4'
+b(x,z,z,z,z)? No
+b(x,x,'4',x,x)? Yes(1)
+  x='2'
+b(x,'2',x,'2',x)? No

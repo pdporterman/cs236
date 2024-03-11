@@ -1,5 +1,0 @@
-chars: 201
-lines: 15
-spaces: 34
-digits: 8
-letters: 147

@@ -1,0 +1,49 @@
+
+
+# one, two, three param predicates, with vars, some renames
+
+
+Schemes:
+
+  a(x)
+  b(x,y)
+  c(x,y,z)
+
+Facts:
+
+  a('1').
+  a('4').
+  a('2').
+
+  b('1','2').
+  b('2','2').
+  b('2','1').
+
+  c('2','2','2').
+  c('4','2','1').
+  c('1','2','4').
+
+Rules:
+
+Queries:
+
+  a(x)?
+
+  b(x,y)?
+  b(x,'2')?
+  b(x,'4')?
+  b('2',y)?
+  b('4',y)?
+
+  c(x,y,z)?
+  c(x,y,'2')?
+  c(x,'1',z)?
+  c(x,'2',z)?
+  c('4',y,z)?
+  c('4','2',z)?
+
+  a(a)?
+  b(a,b)?
+  c(a,b,c)?
+
+

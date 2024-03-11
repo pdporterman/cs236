@@ -93,6 +93,10 @@ public:
         return str.str();
     }
 
+    string getname(){
+        return name;
+    }
+
 
 };
 

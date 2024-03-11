@@ -21,7 +21,7 @@ class Interperter{
 private:
 
 public:
-    Interperter(DataLog log):log(log){
+    explicit Interperter(DataLog log):log(std::move(log)){
     getRelations();
     getTups();
     getQueries();
@@ -41,8 +41,7 @@ public:
         Relation relation(name, scheme);
         data.addRelation(relation);
     }
-    }
-
+}
 
     void getTups(){
         vector<Predicate> facts = log.getFacts();
@@ -59,8 +58,41 @@ public:
         }
     }
 
-    void evalQueries(Relation query, Relation relation){
+    static void evalQueries(vector<Parameter> query, Relation relation, Predicate question){
+        // select
+        Relation temp = std::move(relation);
+        map<string, int> seen;
+        vector<string> colsNames;
+        vector<int> colsIndex;
+        for (int i=0; i < static_cast<int>(query.size()); i++){
+            if (!query[i].isID()){                                                         //select based on value
+                temp = temp.select(i, query[i].getVal());
+            }
+            else{
+                auto it = seen.find(query[i].getVal());
+                if (it != seen.end()){                                                      // check seen for match
+                    temp = temp.selectMatch(seen[query[i].getVal()], i);
+                }
+                else{                                                                      // save ID in seen
+                    seen[query[i].getVal()] = i;
+                    colsNames.push_back(query[i].getVal());
+                    colsIndex.push_back(i);
 
+                }
+            }
+        }
+        Scheme scheme(colsNames);
+        temp.rename(scheme);      // rename
+        temp = temp.project(colsIndex, scheme);          // project seen Ids
+        stringstream out;              //print
+        if (!temp.getTups().empty()){
+            out << question.schemesToString() <<"? Yes(" << temp.getTups().size() << ")" << endl;
+            out << temp.toString();
+        }
+        else{
+            out << question.schemesToString() <<"? No" << endl;
+        }
+        cout <<  out.str();
     }
 
     void getQueries(){
@@ -69,14 +101,8 @@ public:
             vector<Parameter> lst = pred.getpars();
             string name = lst.begin()->toString();
             lst.erase(lst.begin());
-            vector<string> cols;
-            for (auto c : lst){
-                cols.push_back(c.toString());
-            }
-            Scheme scheme(cols);
-            Relation relation(name, scheme);
-            Relation savedRelation = data.getRelation(name);
-
+            Relation relation = data.getRelation(name);
+            evalQueries(lst, relation, pred);
         }
     }
 

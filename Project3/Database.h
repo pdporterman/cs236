@@ -27,16 +27,11 @@ public:
     }
 
     void addRelation(Relation r){
-        //relations.insert(pair<string, Relation>(r.getName(), r));
         relations[r.getName()] = r;
     }
 
     Relation getRelation(string name) {
-        auto it = relations.find(name);
-        if (it != relations.end()){
-            return relations[name];
-        }
-
+        return relations[name];
     }
 };
 

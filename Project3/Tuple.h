@@ -18,9 +18,12 @@ public:
     string toString(const Scheme& scheme) const {
         const Tuple& tuple = *this;
         stringstream out;
-        for (int i = 0; i < tuple.size(); i++) {
-            out << scheme.at(i) << "=";
-            out << tuple.at(i) << ", ";
+        if (scheme.empty()) {
+            return out.str();
+        }
+        out << scheme.at(0) << "=" << tuple.at(0);
+        for (int i = 1; i < static_cast<int>(scheme.size()); i++) {
+            out << ", " << scheme.at(i) << "=" << tuple.at(i);
         }
         return out.str();
     }

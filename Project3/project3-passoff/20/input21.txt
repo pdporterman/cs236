@@ -1,0 +1,22 @@
+
+
+# no facts, everything is false
+
+
+Schemes:
+
+A(X)
+B(Y)
+C(Z)
+
+Facts:
+
+Rules:
+
+Queries:
+
+A('2')?
+B('4')?
+C('8')?
+
+
