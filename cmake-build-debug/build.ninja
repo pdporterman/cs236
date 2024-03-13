@@ -49,12 +49,12 @@ cmake_ninja_workdir = C$:/Users/pdpor/Desktop/CS236/cs236/cmake-build-debug/
 
 build cmake_object_order_depends_target_cs236: phony || CMakeFiles/cs236.dir
 
-build CMakeFiles/cs236.dir/Project3/main.cpp.obj: CXX_COMPILER__cs236_unscanned_Debug C$:/Users/pdpor/Desktop/CS236/cs236/Project3/main.cpp || cmake_object_order_depends_target_cs236
-  DEP_FILE = CMakeFiles\cs236.dir\Project3\main.cpp.obj.d
+build CMakeFiles/cs236.dir/Project/main.cpp.obj: CXX_COMPILER__cs236_unscanned_Debug C$:/Users/pdpor/Desktop/CS236/cs236/Project/main.cpp || cmake_object_order_depends_target_cs236
+  DEP_FILE = CMakeFiles\cs236.dir\Project\main.cpp.obj.d
   FLAGS = -g -std=gnu++14 -fdiagnostics-color=always
   INCLUDES = -IC:/Users/pdpor/Desktop/CS236/cs236/Project1
   OBJECT_DIR = CMakeFiles\cs236.dir
-  OBJECT_FILE_DIR = CMakeFiles\cs236.dir\Project3
+  OBJECT_FILE_DIR = CMakeFiles\cs236.dir\Project
 
 
 # =============================================================================
@@ -64,7 +64,7 @@ build CMakeFiles/cs236.dir/Project3/main.cpp.obj: CXX_COMPILER__cs236_unscanned_
 #############################################
 # Link the executable cs236.exe
 
-build cs236.exe: CXX_EXECUTABLE_LINKER__cs236_Debug CMakeFiles/cs236.dir/Project3/main.cpp.obj
+build cs236.exe: CXX_EXECUTABLE_LINKER__cs236_Debug CMakeFiles/cs236.dir/Project/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\cs236.dir

@@ -99,4 +99,35 @@ public:
         return name;
     };
 
+    static bool joinable(const Scheme& leftScheme, const Scheme& rightScheme, const Tuple& leftTuple, const Tuple& rightTuple) {
+        for (unsigned leftIndex = 0; leftIndex < leftScheme.size(); leftIndex++) {
+            const string &leftName = leftScheme.at(leftIndex);
+            const string &leftValue = leftTuple.at(leftIndex);
+//            cout << "left name: " << leftName << " value: " << leftValue << endl;
+            for (unsigned rightIndex = 0; rightIndex < rightScheme.size(); rightIndex++) {
+                const string &rightName = rightScheme.at(rightIndex);
+                const string &rightValue = rightTuple.at(rightIndex);
+                if (rightName == leftName && rightValue != leftValue){
+                    return false;
+                }
+//                cout << "right name: " << rightName << " value: " << rightValue << endl;
+        }
+    }
+        return true;
+    }
+
+    Relation join(Relation& right) {
+        const Relation& left = *this;
+        Relation result;
+        for (Tuple leftTuple: left.tuples) {
+            cout << "left tuple: " << leftTuple.toString(left.scheme) << endl;
+            for (Tuple rightTuple: right.tuples) {
+                cout << "right tuple: " << rightTuple.toString(right.scheme) << endl;
+            }
+        }
+        return result;
+    }
+
+
+
 };

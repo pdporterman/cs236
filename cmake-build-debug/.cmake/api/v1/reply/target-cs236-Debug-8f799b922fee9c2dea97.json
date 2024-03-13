@@ -125,48 +125,48 @@
 	[
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Database.h",
+			"path" : "Project/Database.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Tuple.h",
+			"path" : "Project/Tuple.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Interpreter.h",
+			"path" : "Project/Interpreter.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Parameter.h",
+			"path" : "Project/Parameter.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Predicate.h",
+			"path" : "Project/Predicate.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Relation.h",
+			"path" : "Project/Relation.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/Scheme.h",
+			"path" : "Project/Scheme.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "Project3/DatalogProgram.h",
+			"path" : "Project/DatalogProgram.h",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "Project3/main.cpp",
+			"path" : "Project/main.cpp",
 			"sourceGroupIndex" : 1
 		}
 	],
