@@ -61,6 +61,10 @@ public:
         return Queries;
     }
 
+    vector<Rule> getRules(){
+        return Rules;
+    }
+
 
     string ToString(){
         ostringstream str;

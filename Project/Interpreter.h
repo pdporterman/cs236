@@ -24,6 +24,7 @@ public:
     explicit Interperter(DataLog log):log(std::move(log)){
     getRelations();
     getTups();
+    cout << "Query Evaluation" << endl;
     getQueries();
     }
 
@@ -55,6 +56,14 @@ public:
             }
             Tuple tuple(cols);
             data.addTup(name, tuple);
+        }
+    }
+
+    void getRules(){
+        cout << "Rule Evaluation" << endl;
+        vector<Rule> rules = log.getRules();
+        for (auto pred : rules){
+
         }
     }
 
