@@ -47,15 +47,6 @@ public:
         return tuples;
     }
 
-//    int findIndex(string col){
-//        for (int i = 0; i < static_cast<int>(scheme.size()); ++i){
-//            if (scheme[i] == col) {
-//                return i; // Return the index if the string is found
-//            }
-//        }
-//        return -1;
-//    }
-
     Relation selectMatch(int index1, int index2) const {
         Relation result(name, scheme);
         for (const auto& tuple : tuples){
@@ -75,6 +66,8 @@ public:
         }
         return result;
     }
+
+    //check with TAs
 
     Relation project(vector<int> cols, Scheme newScheme){
         //Scheme newCols(cols);
@@ -101,6 +94,50 @@ public:
         return name;
     };
 
+    static bool common(Scheme left, const Scheme& right){
+        for (const auto & val : right) {
+            auto check = find(left.begin(), left.end(), val);
+            if (check != left.end()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    Relation same(Relation right) {
+        Relation result = *this;
+        set<Tuple> tups = right.getTups();
+        for (const auto& tup : tups){
+            result.addTuple(tup);
+        }
+        return result;
+    }
+
+    Relation joinMethod(Relation right){
+        Relation& left = *this;
+        if (left.scheme == right.scheme){
+            return left.same(right);
+        }
+        else if (common(left.scheme, right.scheme)){
+            return left.join(right);
+        }
+        else {
+            return left.unionize(right);
+        }
+
+    }
+
+    Relation unionize(Relation right){
+        const Relation& left = *this;
+        Relation result;
+        for (const Tuple& leftTuple: left.tuples) {
+            for (const Tuple& rightTuple: right.tuples) {
+                result.addTuple(joinTuples(left.scheme, right.scheme, leftTuple, rightTuple));
+            }
+        }
+        return result;
+    }
+
     static bool joinable(const Scheme& leftScheme, const Scheme& rightScheme, const Tuple& leftTuple, const Tuple& rightTuple) {
         for (unsigned leftIndex = 0; leftIndex < leftScheme.size(); leftIndex++) {
             const string &leftName = leftScheme.at(leftIndex);
@@ -124,7 +161,7 @@ public:
         for (const Tuple& leftTuple: left.tuples) {
             for (const Tuple& rightTuple: right.tuples) {
                 if (joinable(left.scheme, right.scheme, leftTuple, rightTuple)){
-                    result.addTuple(joinTuples(leftTuple, rightTuple));
+                    result.addTuple(joinTuples(left.scheme, right.scheme, leftTuple, rightTuple));
                 }
             }
         }
@@ -134,12 +171,13 @@ public:
 
     // check with TAs
 
-    static Tuple joinTuples(Tuple left, const Tuple& right){ // add if to check schemes
+    static Tuple joinTuples(Scheme leftScheme, Scheme rightScheme, Tuple left, const Tuple& right){ // add if to check schemes
         Tuple result = left;
-        for (const auto& value : right){
-            auto it = find(left.begin(), left.end(), value);
-            if (it == left.end()) {
-                result.push_back(value);
+        for (int i = 0; i < right.size(); i++){
+            auto name = find(leftScheme.begin(), leftScheme.end(), rightScheme[i]);
+            auto val = find(left.begin(), left.end(), right[i]);
+            if (val == left.end() && name == leftScheme.end()) {
+                result.push_back(right[i]);
             }
         }
         return result;
@@ -160,3 +198,7 @@ public:
 
 
 };
+
+
+// make union function for if no cols are the same
+// make join for same schemes

@@ -24,6 +24,8 @@ public:
     explicit Interperter(DataLog log):log(std::move(log)){
     getRelations();
     getTups();
+    cout << "Rules "
+    getRules();
     cout << "Query Evaluation" << endl;
     getQueries();
     }
@@ -59,10 +61,21 @@ public:
         }
     }
 
+    void processRule(vector<Predicate> rule){
+        for (int i = rule.size() - 1; i > 0; i--){
+
+        }
+    }
+
     void getRules(){
         cout << "Rule Evaluation" << endl;
         vector<Rule> rules = log.getRules();
         for (auto pred : rules){
+            cout << pred.toString() << endl;
+            vector<Predicate> lst = pred.getVec();
+            string name = lst.begin()->toString();
+            lst.erase(lst.begin());
+            Relation relation = data.getRelation(name);
 
         }
     }
@@ -117,3 +130,7 @@ public:
 
 
 };
+
+// grab relation start of rule as name
+// then for pred do eval on each relation and then join them
+// then use select project on resulting table then use that relaiton for name
