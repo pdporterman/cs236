@@ -1,49 +1,23 @@
-
-
-# one, two, three param predicates, with vars, some renames
-
-
 Schemes:
-
-  a(x)
-  b(x,y)
-  c(x,y,z)
+  snap(S,N,A,P)
+  csg(C,S,G)
+  cn(C,N)
+  ncg(N,C,G)
 
 Facts:
-
-  a('1').
-  a('4').
-  a('2').
-
-  b('1','2').
-  b('2','2').
-  b('2','1').
-
-  c('2','2','2').
-  c('4','2','1').
-  c('1','2','4').
+  snap('12345','C. Brown','12 Apple St.','555-1234').
+  snap('22222','P. Patty','56 Grape Blvd','555-9999').
+  snap('33333','Snoopy','12 Apple St.','555-1234').
+  csg('CS101','12345','A').
+  csg('CS101','22222','B').
+  csg('CS101','33333','C').
+  csg('EE200','12345','B+').
+  csg('EE200','22222','B').
 
 Rules:
+  cn(c,n) :- snap(S,n,A,P),csg(c,S,G).
+  ncg(n,c,g) :- snap(S,n,A,P),csg(c,S,g).
 
 Queries:
-
-  a(x)?
-
-  b(x,y)?
-  b(x,'2')?
-  b(x,'4')?
-  b('2',y)?
-  b('4',y)?
-
-  c(x,y,z)?
-  c(x,y,'2')?
-  c(x,'1',z)?
-  c(x,'2',z)?
-  c('4',y,z)?
-  c('4','2',z)?
-
-  a(a)?
-  b(a,b)?
-  c(a,b,c)?
-
-
+  cn('CS101',Name)?
+  ncg('Snoopy',Course,Grade)?

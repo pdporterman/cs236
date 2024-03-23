@@ -34,7 +34,7 @@ public:
     }
 
 
-    void addRule(Rule rule){
+    void addRule(Rule& rule){
         Rules.push_back(rule);
     }
 
@@ -61,7 +61,7 @@ public:
         return Queries;
     }
 
-    vector<Rule> getRules(){
+    vector<Rule> getRules() {
         return Rules;
     }
 

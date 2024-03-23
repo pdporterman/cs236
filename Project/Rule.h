@@ -10,7 +10,7 @@ using namespace std;
 class Rule{
 private:
 
-    vector<Predicate> rule{};
+    vector<Predicate> rule;
 
 public:
 
@@ -23,9 +23,12 @@ public:
         rule.push_back(pred);
     }
 
-    vector<Predicate> getVec(){
+    vector<Predicate> getVec() const {
         return rule;
     }
+
+
+
 
 
     string toString(){
@@ -42,4 +45,11 @@ public:
         return str.str();
     }
 
+    vector<Parameter> getNamePars() {
+        return rule[0].getpars();
+    }
+
+    vector<Parameter> getPars(int i) {
+        return rule[i].getpars();
+    }
 };

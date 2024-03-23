@@ -69,6 +69,7 @@ public:
 
     //check with TAs
 
+
     Relation project(vector<int> cols, Scheme newScheme){
         //Scheme newCols(cols);
         Relation result(name, newScheme);
@@ -94,14 +95,18 @@ public:
         return name;
     };
 
+    Scheme getScheme(){
+        return scheme;
+    }
+
     static bool common(Scheme left, const Scheme& right){
         for (const auto & val : right) {
             auto check = find(left.begin(), left.end(), val);
             if (check != left.end()){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     Relation same(Relation right) {
@@ -129,7 +134,9 @@ public:
 
     Relation unionize(Relation right){
         const Relation& left = *this;
+        Scheme joint = joinSchemes(left.scheme, right.scheme);
         Relation result;
+        result.rename(joint);
         for (const Tuple& leftTuple: left.tuples) {
             for (const Tuple& rightTuple: right.tuples) {
                 result.addTuple(joinTuples(left.scheme, right.scheme, leftTuple, rightTuple));
