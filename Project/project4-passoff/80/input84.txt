@@ -1,0 +1,48 @@
+
+
+# joins: more than one common variable
+
+
+Schemes:
+
+  c(x,y,z,w)
+  d(x,y,z,w,v)
+
+  e(j,k,x,y,v,w,z)
+  f(p,q,r,s,t,u)
+  g(q,r,s,t,u)
+
+Facts:
+
+  c('1','2','3','4').
+  c('3','2','4','1').
+  c('2','2','4','4').
+  c('2','2','4','4').
+  c('4','2','3','2').
+
+  d('1','2','3','4','5').
+  d('5','2','2','4','2').
+  d('3','4','3','4','3').
+  d('2','1','2','1','2').
+  d('2','1','2','1','2').
+
+Rules:
+
+  e(j,k,x,y,v,w,z) :- c(j,x,k,y), d(v,x,w,y,z).   # join on x,y
+  f(w,x,y,z,j,k) :- c(x,y,z,w), d(j,x,y,z,k).     # join on x,y,z
+  f(w,x,y,z,j,k) :- c(w,x,y,z), d(j,x,y,z,k).     # join on x,y,z
+  f(w,z,x,y,j,k) :- c(z,x,y,w), d(j,x,y,z,k).     # join on x,y,z
+  f(w,y,x,z,j,k) :- c(y,x,w,z), d(j,z,k,y,x).     # join on x,y,z
+  g(z,y,x,w,k) :- c(z,y,x,w), d(w,x,y,z,k).       # join on w,x,y,z
+  g(y,x,z,w,k) :- c(y,x,z,w), d(w,x,y,z,k).       # join on w,x,y,z
+
+Queries:
+
+  c(x,y,z,w)?
+  d(x,y,z,w,v)?
+
+  e(j,k,x,y,v,w,z)?
+  f(p,q,r,s,t,u)?
+  g(q,r,s,t,u)?
+
+

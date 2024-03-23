@@ -1,0 +1,52 @@
+
+
+# joins: two relations, one common variable
+
+
+Schemes:
+
+  a(x,y)
+  b(x,y,z)
+
+  c(x,y,z,w)
+  d(x,y,z,w)
+  e(x,y,z,w)
+
+  f(x,y,z,w)
+  g(x,y,z,w)
+  h(x,y,z,w)
+
+Facts:
+
+  a('1','4').
+  a('2','4').
+  a('2','5').
+
+  b('5','4','7').
+  b('5','4','8').
+  b('6','4','8').
+
+Rules:
+
+  c(x,y,z,w) :- a(x,y), b(x,z,w).
+  d(x,y,z,w) :- a(x,y), b(y,z,w).
+  e(x,y,z,w) :- a(x,y), b(z,y,w).
+
+  f(x,y,z,w) :- b(x,y,z), a(w,x).
+  g(x,y,z,w) :- b(x,y,z), a(w,y).
+  h(x,y,z,w) :- b(x,y,z), a(w,z).
+
+Queries:
+
+  a(x,y)?
+  b(x,y,z)?
+
+  c(x,y,z,w)?
+  d(x,y,z,w)?
+  e(x,y,z,w)?
+
+  f(x,y,z,w)?
+  g(x,y,z,w)?
+  h(x,y,z,w)?
+
+

@@ -1,0 +1,37 @@
+
+
+# joins: two relations, no common variables
+
+
+Schemes:
+
+  a(x,y)
+  b(x,y,z)
+
+  c(x,y,z,v,w)
+  d(x,y,z,v,w)
+
+Facts:
+
+  a('1','4').
+  a('2','4').
+  a('2','5').
+
+  b('5','4','7').
+  b('5','4','8').
+  b('6','4','8').
+
+Rules:
+
+  c(x,y,z,v,w) :- a(x,y), b(z,v,w).
+  d(x,y,z,v,w) :- b(x,y,z), a(v,w).
+
+Queries:
+
+  a(x,y)?
+  b(x,y,z)?
+
+  c(x,y,z,v,w)?
+  d(x,y,z,v,w)?
+
+

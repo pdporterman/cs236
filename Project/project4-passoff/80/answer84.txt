@@ -1,0 +1,50 @@
+Rule Evaluation
+e(j,k,x,y,v,w,z) :- c(j,x,k,y),d(v,x,w,y,z).
+  j='1', k='3', x='2', y='4', v='1', w='3', z='5'
+  j='1', k='3', x='2', y='4', v='5', w='2', z='2'
+  j='2', k='4', x='2', y='4', v='1', w='3', z='5'
+  j='2', k='4', x='2', y='4', v='5', w='2', z='2'
+f(w,x,y,z,j,k) :- c(x,y,z,w),d(j,x,y,z,k).
+  p='4', q='2', r='2', s='4', t='5', u='2'
+f(w,x,y,z,j,k) :- c(w,x,y,z),d(j,x,y,z,k).
+  p='1', q='2', r='3', s='4', t='1', u='5'
+f(w,z,x,y,j,k) :- c(z,x,y,w),d(j,x,y,z,k).
+  p='2', q='4', r='2', s='3', t='1', u='5'
+f(w,y,x,z,j,k) :- c(y,x,w,z),d(j,z,k,y,x).
+  p='3', q='4', r='2', s='2', t='5', u='2'
+g(z,y,x,w,k) :- c(z,y,x,w),d(w,x,y,z,k).
+g(y,x,z,w,k) :- c(y,x,z,w),d(w,x,y,z,k).
+  q='3', r='2', s='4', t='1', u='5'
+e(j,k,x,y,v,w,z) :- c(j,x,k,y),d(v,x,w,y,z).
+f(w,x,y,z,j,k) :- c(x,y,z,w),d(j,x,y,z,k).
+f(w,x,y,z,j,k) :- c(w,x,y,z),d(j,x,y,z,k).
+f(w,z,x,y,j,k) :- c(z,x,y,w),d(j,x,y,z,k).
+f(w,y,x,z,j,k) :- c(y,x,w,z),d(j,z,k,y,x).
+g(z,y,x,w,k) :- c(z,y,x,w),d(w,x,y,z,k).
+g(y,x,z,w,k) :- c(y,x,z,w),d(w,x,y,z,k).
+
+Schemes populated after 2 passes through the Rules.
+
+Query Evaluation
+c(x,y,z,w)? Yes(4)
+  x='1', y='2', z='3', w='4'
+  x='2', y='2', z='4', w='4'
+  x='3', y='2', z='4', w='1'
+  x='4', y='2', z='3', w='2'
+d(x,y,z,w,v)? Yes(4)
+  x='1', y='2', z='3', w='4', v='5'
+  x='2', y='1', z='2', w='1', v='2'
+  x='3', y='4', z='3', w='4', v='3'
+  x='5', y='2', z='2', w='4', v='2'
+e(j,k,x,y,v,w,z)? Yes(4)
+  j='1', k='3', x='2', y='4', v='1', w='3', z='5'
+  j='1', k='3', x='2', y='4', v='5', w='2', z='2'
+  j='2', k='4', x='2', y='4', v='1', w='3', z='5'
+  j='2', k='4', x='2', y='4', v='5', w='2', z='2'
+f(p,q,r,s,t,u)? Yes(4)
+  p='1', q='2', r='3', s='4', t='1', u='5'
+  p='2', q='4', r='2', s='3', t='1', u='5'
+  p='3', q='4', r='2', s='2', t='5', u='2'
+  p='4', q='2', r='2', s='4', t='5', u='2'
+g(q,r,s,t,u)? Yes(1)
+  q='3', r='2', s='4', t='1', u='5'

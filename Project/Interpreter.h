@@ -94,11 +94,22 @@ public:
         temp.rename(scheme);
         temp = temp.project(colsIndex, scheme);          // project seen Ids
         int startSize = data.getRelation(name).getTups().size();
+        Relation printer;
         for (const auto& tup : temp.getTups()){
-            data.addTup(name, tup);
+            if (data.addTup(name, tup)){
+                printer.addTuple(tup);
+            }
+        }
+        vector<string> othernames; // start code to get matching cal names
+        for (int i = 0; i < colsNames.size(); i++){
+            othernames.push_back(data.getRelation(name).getScheme()[i]);
+        }
+        if (othernames.size() > 0){
+            Scheme oldcols(othernames);
+            printer.rename(oldcols);
         }
         if (data.getRelation(name).getTups().size() > startSize){
-            cout << temp.toString();
+            cout << printer.toString();
         }
     }
 

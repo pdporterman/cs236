@@ -76,10 +76,7 @@ public:
         for (auto tuple : tuples){ // tupels first
             Tuple tup({});
                 for (auto col : cols){ // cols
-                    //int index = findIndex(col);
-                    //if (index != -1){
                     tup.push_back(tuple.at(col));  // tup.append(val)
-                //}
             }
             result.addTuple(tup);
         }
@@ -183,7 +180,7 @@ public:
         for (int i = 0; i < right.size(); i++){
             auto name = find(leftScheme.begin(), leftScheme.end(), rightScheme[i]);
             auto val = find(left.begin(), left.end(), right[i]);
-            if (val == left.end() && name == leftScheme.end()) {
+            if (name == leftScheme.end()) {
                 result.push_back(right[i]);
             }
         }

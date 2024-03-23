@@ -1,0 +1,53 @@
+
+
+# project with re-order, no joins
+
+
+Schemes:
+
+  a(x,y,z,w)
+  b(x,y,z,w,v)
+
+  c(x,y,z)
+  d(x,y,z,w)
+  e(x,y,z,w)
+  f(x,y,z,w,v)
+  g(x,y,z)
+  h(x,y)
+
+Facts:
+
+  a('1','2','3','4').
+  a('3','2','4','1').
+  a('2','2','4','4').
+  a('2','2','4','4').
+  a('4','2','3','2').
+
+  b('1','2','3','4','5').
+  b('5','2','2','4','2').
+  b('3','4','3','4','3').
+  b('2','1','2','1','2').
+  b('2','1','2','1','2').
+
+Rules:
+
+  c(z,y,x) :- a(w,x,y,z).
+  d(y,x,z,w) :- a(w,x,y,z).
+  e(x,w,v,y) :- b(v,w,x,y,z).
+  f(w,v,z,x,y) :- b(v,w,x,y,z).
+  g(y,z,x) :- b(v,w,x,y,z).
+  h(y,x) :- b(v,w,x,y,z).
+
+Queries:
+
+  a(x,y,z,w)?
+  b(x,y,z,w,v)?
+
+  c(x,y,z)?
+  d(x,y,z,w)?
+  e(x,y,z,w)?
+  f(x,y,z,w,v)?
+  g(x,y,z)?
+  h(x,y)?
+
+

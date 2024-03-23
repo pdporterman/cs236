@@ -22,8 +22,16 @@ private:
 public:
     Database()= default;
 
-    void addTup(string name, Tuple tuple){
+    bool addTup(string name, Tuple tuple){
+        int start = relations[name].getTups().size();
         relations[name].addTuple(tuple);
+        int final = relations[name].getTups().size();
+        if (final > start){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     void addRelation(Relation r){

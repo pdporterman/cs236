@@ -180,23 +180,10 @@ public:
 
 
     void rule() {
-        match(TokenType::ID);
-        match(TokenType::LEFT_PAREN);
-        Helper();
-        idList();
-        match(TokenType::RIGHT_PAREN);
-        newRule.addPred(pred);
-        pred = Predicate();
-        match(TokenType::COLON_DASH);
-        match(TokenType::ID);
-        match(TokenType::LEFT_PAREN);
-        Helper();
-        idList();
-        match(TokenType::RIGHT_PAREN);
-        newRule.addPred(pred);
-        pred = Predicate();
-        while (tokenType() != PERIOD){
-            match(TokenType::COMMA);
+        while (tokenType() == COMMENT){
+            advanceToken();
+        }
+        if (tokenType() != QUERIES){
             match(TokenType::ID);
             match(TokenType::LEFT_PAREN);
             Helper();
@@ -204,10 +191,28 @@ public:
             match(TokenType::RIGHT_PAREN);
             newRule.addPred(pred);
             pred = Predicate();
+            match(TokenType::COLON_DASH);
+            match(TokenType::ID);
+            match(TokenType::LEFT_PAREN);
+            Helper();
+            idList();
+            match(TokenType::RIGHT_PAREN);
+            newRule.addPred(pred);
+            pred = Predicate();
+            while (tokenType() != PERIOD) {
+                match(TokenType::COMMA);
+                match(TokenType::ID);
+                match(TokenType::LEFT_PAREN);
+                Helper();
+                idList();
+                match(TokenType::RIGHT_PAREN);
+                newRule.addPred(pred);
+                pred = Predicate();
+            }
+            match(TokenType::PERIOD);
+            newRule.addPred(pred);
+            dl.addRule(newRule);
         }
-        match(TokenType::PERIOD);
-        newRule.addPred(pred);
-        dl.addRule(newRule);
     }
 
     void Helper(){

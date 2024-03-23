@@ -1,0 +1,55 @@
+Rule Evaluation
+c(x) :- a(x,y).
+  x='1'
+  x='2'
+d(y) :- b(x,y,z).
+  x='4'
+e(z) :- b(x,y,z).
+  x='7'
+  x='8'
+f(x,y) :- b(x,y,z).
+  x='5', y='4'
+  x='6', y='4'
+g(x,z) :- b(x,y,z).
+  x='5', y='7'
+  x='5', y='8'
+  x='6', y='8'
+h(y,z) :- b(x,y,z).
+  x='4', y='7'
+  x='4', y='8'
+c(x) :- a(x,y).
+d(y) :- b(x,y,z).
+e(z) :- b(x,y,z).
+f(x,y) :- b(x,y,z).
+g(x,z) :- b(x,y,z).
+h(y,z) :- b(x,y,z).
+
+Schemes populated after 2 passes through the Rules.
+
+Query Evaluation
+a(x,y)? Yes(3)
+  x='1', y='4'
+  x='2', y='4'
+  x='2', y='5'
+b(x,y,z)? Yes(3)
+  x='5', y='4', z='7'
+  x='5', y='4', z='8'
+  x='6', y='4', z='8'
+c(x)? Yes(2)
+  x='1'
+  x='2'
+d(x)? Yes(1)
+  x='4'
+e(x)? Yes(2)
+  x='7'
+  x='8'
+f(x,y)? Yes(2)
+  x='5', y='4'
+  x='6', y='4'
+g(x,y)? Yes(3)
+  x='5', y='7'
+  x='5', y='8'
+  x='6', y='8'
+h(x,y)? Yes(2)
+  x='4', y='7'
+  x='4', y='8'

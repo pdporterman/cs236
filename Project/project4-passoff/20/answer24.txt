@@ -1,0 +1,42 @@
+Rule Evaluation
+d(w) :- c(w).
+c(z) :- b(z).
+b(y) :- a(y).
+  y='1'
+  y='2'
+  y='4'
+d(w) :- c(w).
+c(z) :- b(z).
+  z='1'
+  z='2'
+  z='4'
+b(y) :- a(y).
+d(w) :- c(w).
+  w='1'
+  w='2'
+  w='4'
+c(z) :- b(z).
+b(y) :- a(y).
+d(w) :- c(w).
+c(z) :- b(z).
+b(y) :- a(y).
+
+Schemes populated after 4 passes through the Rules.
+
+Query Evaluation
+a(x)? Yes(3)
+  x='1'
+  x='2'
+  x='4'
+b(y)? Yes(3)
+  y='1'
+  y='2'
+  y='4'
+c(z)? Yes(3)
+  z='1'
+  z='2'
+  z='4'
+d(z)? Yes(3)
+  z='1'
+  z='2'
+  z='4'
