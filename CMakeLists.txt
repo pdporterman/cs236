@@ -14,4 +14,6 @@ add_executable(cs236
         Project/Relation.h
         Project/Scheme.h
         Project/DatalogProgram.h
-        Project/main.cpp)
+        Project/main.cpp
+        Project/Node.h
+        Project/Graph.h)
