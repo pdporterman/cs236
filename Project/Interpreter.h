@@ -5,9 +5,12 @@
 #include <vector>
 #include <set>
 #include <sstream>
+#include "Graph.h"
+#include "Node.h"
 #include "Tuple.h"
 #include "Scheme.h"
 #include "Relation.h"
+#include "Rule.h"
 #include "DatalogProgram.h"
 #include "Database.h"
 #include "Predicate.h"
@@ -234,6 +237,57 @@ public:
             Relation relation = data.getRelation(name);
             evalQueries(lst, relation, pred);
         }
+    }
+
+    static Graph makeGraph(const vector<Rule>& rules) {
+        stringstream out;
+        Graph graph(rules.size());
+        int c = 0;
+        for (auto rule : rules){
+            vector<pair<int,int>> depend;
+            vector<string> names;
+            vector<Parameter> pred = rule.getVec()[0].getpars();
+            out << "from rule R" << c << ": " << pred[0].toString() << "() :- ";
+            for (int i = 1; i < pred.size(); i++){
+                out << pred[i].toString() << "()";
+                if (i  == pred.size() - 1){
+                    out << endl;
+                }
+                else{
+                    out << ",";
+                }
+            }
+            for (int i = 1; i < pred.size(); i++){
+                string name = pred[i].toString();
+                names.push_back(name);
+                out << "from body predicate: "<< name << "()" << endl;
+                int n = 0;
+                for (auto rule : rules) {
+                    vector<Parameter> pred = rule.getVec()[0].getpars();
+                    string other = pred[0].toString();
+                    out << "to rule R" << n << ": " << other << "() :- ";
+                    auto it = find(names.begin(), names.end(), other);
+
+                    for (int i = 1; i < pred.size(); i++) {
+                        out << pred[i].toString() << "()";
+                        if (i == pred.size() - 1) {
+                            out << endl;
+                        } else {
+                            out << ",";
+                        }
+                    }
+                    if (it != names.end()) {
+                        out << "dependency found: (R" << c << ",R" << n << ")" << endl;
+                        graph.addEdge(c,n);
+                    }
+                    n += 1;
+                }
+            }
+            c += 1;
+        };
+        cout << out.str();
+        return graph;
+
     }
 
 
