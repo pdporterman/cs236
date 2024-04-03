@@ -16,6 +16,7 @@ private:
 
     map<int,Node> nodes;
 
+
 public:
 
     Graph(int size) {
@@ -35,6 +36,10 @@ public:
             out << "R" << nodeID << ":" << node.toString();
         }
         return out.str();
+    }
+
+    const map<int, Node> &getNodes() const {
+        return nodes;
     }
 
 };

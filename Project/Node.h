@@ -13,11 +13,16 @@ class Node {
 private:
 
     set<int> adjacentNodeIDs;
+    bool visited = false;
 
 public:
 
     void addEdge(int adjacentNodeID) {
         adjacentNodeIDs.insert(adjacentNodeID);
+    }
+
+    const set<int> &getAdjacentNodeIDs() const {
+        return adjacentNodeIDs;
     }
 
     string toString(){
@@ -32,6 +37,14 @@ public:
         }
         out << std::endl;
         return out.str();
+    }
+
+    bool isVisited() const {
+        return visited;
+    }
+
+    void setVisited() {
+        Node::visited = true;
     }
 
 };

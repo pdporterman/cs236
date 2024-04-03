@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 #include <sstream>
+#include <algorithm>
 #include "Graph.h"
 #include "Node.h"
 #include "Tuple.h"
@@ -160,15 +161,39 @@ public:
         return result;
     }
 
+    void depthFirst(Graph graph, int i, vector<int> vector1, vector<int> vector2) {
+
+    }
+
+    vector<int> postOrder(Graph graph) {
+        vector<int> visited;
+        vector<int> post;
+        for (auto key : graph.getNodes()){
+            auto it = find(visited.begin(), visited.end(), key.first);
+
+            if (it == visited.end()){
+                for (auto item : key.second.getAdjacentNodeIDs()) {
+                    auto i = find(visited.begin(), visited.end(), item);
+                    if (i == visited.end()) {
+                        depthFirst(graph, item, visited, post);
+                    }
+                }
+            }
+        }
+        return post;
+    }
+
     void getRules(){
         vector<Rule> rules = log.getRules();
+        Graph reverse = makeGraph(rules);
+        vector<int> order = postOrder(reverse);
         vector<int> startSizes;
         vector<int> finalSizes;
-        for (Rule rule : rules){
-            Rule copy = rule;
+        for (int index : order){
+            Rule copy = rules[index];
             cout << copy.toString() << endl;
-            vector<Parameter> namePars = rule.getNamePars(); // name at end to eval
-            Relation bigTable = makeTable(rule); //take care of combining the right side
+            vector<Parameter> namePars = rules[index].getNamePars(); // name at end to eval
+            Relation bigTable = makeTable(rules[index]); //take care of combining the right side
 
 
             string name = namePars.begin()->toString();  // get relation
@@ -242,57 +267,57 @@ public:
     static Graph makeGraph(const vector<Rule>& rules) {
         stringstream out;
         Graph graph(rules.size());
+        Graph reverse(rules.size());
         int c = 0;
         for (auto rule : rules){
             vector<pair<int,int>> depend;
             vector<string> names;
             vector<Parameter> pred = rule.getVec()[0].getpars();
-            out << "from rule R" << c << ": " << pred[0].toString() << "() :- ";
-            for (int i = 1; i < pred.size(); i++){
-                out << pred[i].toString() << "()";
-                if (i  == pred.size() - 1){
-                    out << endl;
-                }
-                else{
-                    out << ",";
-                }
-            }
+            //out << "from rule R" << c << ": " << pred[0].toString() << "() :- ";
+//            for (int i = 1; i < pred.size(); i++){
+//                //out << pred[i].toString() << "()";
+//                if (i  == pred.size() - 1){
+//                    //out << endl;
+//                }
+//                else{
+//                    //out << ",";
+//                }
+//            }
             for (int i = 1; i < pred.size(); i++){
                 string name = pred[i].toString();
                 names.push_back(name);
-                out << "from body predicate: "<< name << "()" << endl;
+                //out << "from body predicate: "<< name << "()" << endl;
                 int n = 0;
                 for (auto rule : rules) {
                     vector<Parameter> pred = rule.getVec()[0].getpars();
                     string other = pred[0].toString();
-                    out << "to rule R" << n << ": " << other << "() :- ";
+                    //out << "to rule R" << n << ": " << other << "() :- ";
                     auto it = find(names.begin(), names.end(), other);
 
-                    for (int i = 1; i < pred.size(); i++) {
-                        out << pred[i].toString() << "()";
-                        if (i == pred.size() - 1) {
-                            out << endl;
-                        } else {
-                            out << ",";
-                        }
-                    }
+//                    for (int i = 1; i < pred.size(); i++) {
+//                        //out << pred[i].toString() << "()";
+//                        if (i == pred.size() - 1) {
+//                            //out << endl;
+//                        } else {
+//                            //out << ",";
+//                        }
+//                    }
                     if (it != names.end()) {
-                        out << "dependency found: (R" << c << ",R" << n << ")" << endl;
+                        //out << "dependency found: (R" << c << ",R" << n << ")" << endl;
                         graph.addEdge(c,n);
+                        reverse.addEdge(n, c);
                     }
                     n += 1;
                 }
             }
             c += 1;
         };
+        out << "Dependency Graph" << endl;
         cout << out.str();
-        return graph;
+        cout << graph.toString() << endl;
+        return reverse;
 
-    }
+    } //prints dependency graph and returns reverse edge graph
 
 
 };
-
-// grab relation start of rule as name
-// then for pred do eval on each relation and then join them
-// then use select project on resulting table then use that relaiton for name
