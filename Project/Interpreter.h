@@ -161,7 +161,7 @@ public:
         return result;
     }
 
-    void depthFirst(Graph graph, int i, vector<int> visited, vector<int> post) {
+    void depthFirst(Graph graph, int i, vector<int>& visited, vector<int>& post) {
         Node node = graph.at(i);
         for (auto item : node.getAdjacentNodeIDs()) {
             auto i = find(visited.begin(), visited.end(), item);
