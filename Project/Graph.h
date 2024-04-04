@@ -38,6 +38,10 @@ public:
         return out.str();
     }
 
+    Node at(int index){
+        return nodes[index];
+    }
+
     const map<int, Node> &getNodes() const {
         return nodes;
     }

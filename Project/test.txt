@@ -1,23 +1,18 @@
-
-
-# requires 8 passes through the rules
-# produces all 8 rotations of 'abcdwxyz'
-
-
 Schemes:
-
-slide(A,B,C,D,W,X,Y,Z)
+Parent(p,c)
+Sibling(a,b)
+Ancestor(x,y)
 
 Facts:
-
-slide('a','b','c','d','w','x','y','z').
+Parent('bob','ned').
+Parent('jim','bob').
+Sibling('sue','ned').
 
 Rules:
-
-slide(b,c,d,w,x,y,z,a) :- slide(a,b,c,d,w,x,y,z).
+Sibling(x,y):-Sibling(y,x).
+Ancestor(x,y):-Ancestor(x,z),Parent(z,y).
+Ancestor(x,y):-Parent(x,y).
 
 Queries:
-
-slide(a,b,c,d,w,x,y,z)?
-
-
+Ancestor(x,'ned')?
+Sibling('ned','sue')?

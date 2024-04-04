@@ -94,7 +94,7 @@ public:
     }
 
     string getname(){
-        return name;
+        return predicate[0].toString();
     }
 
 
