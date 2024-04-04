@@ -161,34 +161,25 @@ public:
         return result;
     }
 
-    void depthFirst(Graph graph, int i, vector<int>& visited, vector<int>& post) {
+    void depthFirst(Graph graph, int i, vector<int>& visited, set<int>& post) {
         Node node = graph.at(i);
         for (auto item : node.getAdjacentNodeIDs()) {
             auto i = find(visited.begin(), visited.end(), item);
             if (i == visited.end()) {
                 visited.push_back(item);
                 depthFirst(graph, item, visited, post);
-                post.push_back(item);
             }
         }
+        post.insert(i);
     } // check with TAs
 
-    vector<int> postOrder(Graph graph) {
+    set<int> postOrder(Graph graph) {
         vector<int> visited;
-        vector<int> post;
-        for (auto key : graph.getNodes()){
+        set<int> post;
+        for (auto key : graph.getNodes()) {
             auto it = find(visited.begin(), visited.end(), key.first);
-
-            if (it == visited.end()){
-                visited.push_back(key.first);
-                for (auto item : key.second.getAdjacentNodeIDs()) {
-                    auto i = find(visited.begin(), visited.end(), item);
-                    if (i == visited.end()) {
-                        visited.push_back(item);
-                        depthFirst(graph, item, visited, post);
-                    }
-                    post.push_back(key.first);
-                }
+            if (it == visited.end()) {
+                depthFirst(graph, key.first, visited, post);
             }
         }
         return post;
@@ -221,12 +212,13 @@ public:
         pair<Graph, Graph> graphs = makeGraph(rules);
         Graph graph = graphs.second;
         Graph reverse = graphs.first;
+        cout << reverse.toString() << endl;
         cout << "Rule Evaluation" << endl;
         vector<int> order = postOrder(reverse);
         vector<vector<int>> sccs = getSCCS(order, graph);
         vector<int> startSizes;
         vector<int> finalSizes;
-        cout << order.size() << endl << sccs.size() << endl;
+        cout << order[0] << order[1] << order[2] << endl << sccs[1].size() << endl;
         for (auto component : sccs) { // added another loop for each component
             cout << "SCC: R" << component[0] << endl;
             int componentPasses = 0; // count loops through component
