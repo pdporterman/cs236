@@ -30,7 +30,7 @@ public:
     getRelations();
     getTups();
 
-    getRules(0);
+    getRules();
     //cout << "\nSchemes populated after " << rulePasses <<" passes through the Rules." << endl;
     cout << "\nQuery Evaluation" << endl;
     getQueries();
@@ -161,21 +161,21 @@ public:
         return result;
     }
 
-    void depthFirst(Graph graph, int i, vector<int>& visited, set<int>& post) {
+    void depthFirst(Graph graph, int i, vector<int>& visited, vector<int>& post) {
         Node node = graph.at(i);
+        visited.push_back(i);
         for (auto item : node.getAdjacentNodeIDs()) {
-            auto i = find(visited.begin(), visited.end(), item);
-            if (i == visited.end()) {
-                visited.push_back(item);
+            auto it = find(visited.begin(), visited.end(), item);
+            if (it == visited.end()) {
                 depthFirst(graph, item, visited, post);
             }
         }
-        post.insert(i);
+        post.push_back(i);
     } // check with TAs
 
-    set<int> postOrder(Graph graph) {
+    vector<int> postOrder(Graph graph) {
         vector<int> visited;
-        set<int> post;
+        vector<int> post;
         for (auto key : graph.getNodes()) {
             auto it = find(visited.begin(), visited.end(), key.first);
             if (it == visited.end()) {
@@ -188,65 +188,96 @@ public:
     vector<vector<int>> getSCCS(vector<int> order, Graph graph) {
         vector<vector<int>> components;
         vector<int> visited;
-        for (auto index : order){
+        for (auto rit = order.rbegin(); rit != order.rend(); ++rit){
+            int index = *rit;
             vector<int> component;
             auto it = find(visited.begin(), visited.end(), index);
 
             if (it == visited.end()){
                 visited.push_back(index);
-                for (auto item : graph.at(index).getAdjacentNodeIDs()) {
-                    auto i = find(visited.begin(), visited.end(), item);
-                    if (i == visited.end()) {
-                        visited.push_back(item);
-                        depthFirst(graph, item, visited, component);
-                    }
-                    components.push_back(component);
-                }
+                depthFirst(graph, index, visited, component);
             }
+            components.push_back(component);
         }
         return components;
     } // check with TAs
 
-    void getRules(int current){
+    bool runOnce(Rule rule){
+        vector<Predicate> parts = rule.getVec();
+        string name = parts[0].getname();
+        for (int i = 1; i < parts.size()-1; i++){
+            string other = parts[i].getname();
+            if (name == other){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    void partTwo(int current, int& componentPasses, vector<Rule> rules, vector<int> component){
+    int start = 0;
+    int finish = 0;
+    bool once = false;
+    if (component.size() == 1){
+        once = runOnce(rules[component[0]]);
+    }
+    for (auto index: component) { // loop through all indexes in component
+            Rule copy = rules[index]; // get rule at component index
+            cout << copy.toString() << endl;
+            vector<Parameter> namePars = rules[index].getNamePars(); // name at end to eval
+            Relation bigTable = makeTable(rules[index]); //take care of combining the right side
+            string name = namePars.begin()->toString();  // get relation
+            namePars.erase(namePars.begin());
+            Relation startRelation = data.getRelation(name);
+            start += startRelation.getTups().size();
+            processRule(name, namePars, bigTable);
+            Relation finishRelation = data.getRelation(name);
+            finish += finishRelation.getTups().size();
+        }
+        componentPasses += 1;
+        if (start < finish && !once) {
+            partTwo(current, componentPasses, rules, component);
+        }
+        else{
+
+        }
+    }
+
+    void getRules(){
         vector<Rule> rules = log.getRules();
         pair<Graph, Graph> graphs = makeGraph(rules);
         Graph graph = graphs.second;
         Graph reverse = graphs.first;
-        cout << reverse.toString() << endl;
         cout << "Rule Evaluation" << endl;
         vector<int> order = postOrder(reverse);
         vector<vector<int>> sccs = getSCCS(order, graph);
         vector<int> startSizes;
         vector<int> finalSizes;
-        cout << order[0] << order[1] << order[2] << endl << sccs[1].size() << endl;
         for (auto component : sccs) { // added another loop for each component
-            cout << "SCC: R" << component[0] << endl;
-            int componentPasses = 0; // count loops through component
-            for (auto index: component) { // loop through all indexes in component
-                Rule copy = rules[index]; // get rule at component index
-                cout << copy.toString() << endl;
-                vector<Parameter> namePars = rules[index].getNamePars(); // name at end to eval
-                Relation bigTable = makeTable(rules[index]); //take care of combining the right side
-                string name = namePars.begin()->toString();  // get relation
-                namePars.erase(namePars.begin());
-                Relation startRelation = data.getRelation(name);
-                startSizes.push_back(startRelation.getTups().size());
-                processRule(name, namePars, bigTable);
-                Relation finishRelation = data.getRelation(name);
-                finalSizes.push_back(finishRelation.getTups().size());
-            }
-            componentPasses += 1;
-            bool runAgain = false;
-            for (int i = 0; i < startSizes.size(); i++) {
-                if (startSizes[i] != finalSizes[i]) {
-                    runAgain = true;
+            if (!component.empty()) {
+                int componentPasses = 0; // count loops through component
+                sort(component.begin(), component.end());
+                cout << "SCC: ";
+                int count = 0;
+                for (int item: component) {
+                    cout << "R" << item;
+                    if (count < component.size() - 1) {
+                        cout << ",";
+                        count++;
+                    }
                 }
-            }
-            if (runAgain) {
-                getRules(current);
-            }
-            else{
-                current += 1;
+                cout << endl;
+                partTwo(0, componentPasses, rules, component);
+                cout << componentPasses << " passes: ";
+                count = 0;
+                for (int item: component) {
+                    cout << "R" << item;
+                    if (count < component.size() - 1) {
+                        cout << ",";
+                        count++;
+                    }
+                }
+                cout << endl;
             }
         }
     }

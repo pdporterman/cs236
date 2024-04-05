@@ -32,13 +32,15 @@ Rules:
   a(x) :- b(x).  # 2-rule cycle
   b(y) :- a(y).
 
-  b(y) :- c(y).  # 2-rule cycle depends on 3-rule cycle
+  b(y) :- c(y).  # 2-rule and 3-rule cycles depend on each other
+  c(y) :- b(y).
 
   c(x) :- d(x).  # 3-rule cycle
   d(y) :- e(y).
   e(z) :- c(z).
 
-  e(z) :- f(z).  # 3-rule cycle depends on 4-rule cycle
+  e(z) :- f(z).  # 3-rule and 4-rule cycles depend on each other
+  f(z) :- e(z).
 
   f(x) :- g(x).  # 4-rule cycle
   g(y) :- h(y).

@@ -32,7 +32,7 @@ Rules:
   a(x) :- b(x).  # 2-rule cycle
   b(y) :- a(y).
 
-  b(y) :- c(y).  # 2-rule cycle depends on 3-rule cycle
+  c(y) :- b(y).  # 3-rule cycle depends on 2-rule cycle
 
   c(x) :- d(x).  # 3-rule cycle
   d(y) :- e(y).

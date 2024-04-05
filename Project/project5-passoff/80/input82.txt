@@ -38,7 +38,7 @@ Rules:
   d(y) :- e(y).
   e(z) :- c(z).
 
-  e(z) :- f(z).  # 3-rule cycle depends on 4-rule cycle
+  f(z) :- e(z).  # 4-rule cycle depends on 3-rule cycle
 
   f(x) :- g(x).  # 4-rule cycle
   g(y) :- h(y).
