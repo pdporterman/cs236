@@ -106,21 +106,9 @@ public:
         return false;
     }
 
-    Relation same(Relation right) {
-        Relation result = *this;
-        set<Tuple> tups = right.getTups();
-        for (const auto& tup : tups){
-            result.addTuple(tup);
-        }
-        return result;
-    }
-
     Relation joinMethod(Relation right){
         Relation& left = *this;
-        if (left.scheme == right.scheme){
-            return left.same(right);
-        }
-        else if (common(left.scheme, right.scheme)){
+        if (common(left.scheme, right.scheme)){
             return left.join(right);
         }
         else {
